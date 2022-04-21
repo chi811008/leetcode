@@ -1,4 +1,26 @@
 s = "abcabcbb"
+# method 1
+mapping = dict()
+max_len = slow = 0
+
+for fast in range(len(s)):
+    c_num = mapping.get(s[fast], 0)
+    # put c in dict
+    mapping[s[fast]] = c_num + 1
+    # if c in mapping
+    if c_num:
+        while mapping[s[fast]] > 1:
+            mapping[s[slow]] = mapping.get(s[slow]) - 1
+            slow += 1
+    # if c not in mapping
+    else:
+        # count len
+        count = fast - slow + 1
+        if count > max_len:
+            max_len = count
+print(max_len)
+
+# method 2
 right, left = 0, 0
 ele = dict()
 max_ele = 0
