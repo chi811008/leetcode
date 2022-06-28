@@ -4,6 +4,19 @@ class ListNode:
         self.val = val
         self.next = next
 
+def middleNode(head):
+    fast, slow = head
+    while fast:
+        fast = fast.next.next
+        slow = slow.next
+    return slow
+    
+
+
+
+
+
+
 # 1. count len
 def middleNode(head):
     linked_len = 0
@@ -21,4 +34,6 @@ def middleNode(head):
     while (fast and fast.next):
         fast = fast.next.next
         slow = slow.next
+    if fast.next:
+        return slow.next
     return slow

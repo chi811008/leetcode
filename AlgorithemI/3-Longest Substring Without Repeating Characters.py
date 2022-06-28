@@ -45,7 +45,6 @@ while right <= (len(s) - 1): #8
         print(ele)
     right += 1
 
-
     tmp_len = right - left
     if tmp_len > max_ele:
         max_ele = tmp_len
