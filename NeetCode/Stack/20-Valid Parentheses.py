@@ -1,13 +1,14 @@
 class Solution:
     def isValid(self, s: str) -> bool:
+        parentheses = {"(": ")", "[": "]", "{": "}"}
         container = list()
         for e in s:
-            if e in ["(", "[", "{"]:
+            if e in parentheses:
                 container.append(e)
             else:
                 if container:
                     l = container.pop()
-                    if (e == ")" and l != "(") or (e == "]" and l != "[") or (e == "}" and l != "{"):
+                    if e != parentheses[l]:
                         return False
                 else:
                     return False
