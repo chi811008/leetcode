@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
         # check rows
@@ -46,3 +48,28 @@ class Solution:
 #             print(False)
 #         else:
 #             square[(k, l)].add(ele)
+
+
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+
+        column = defaultdict(set)
+        row = defaultdict(set)
+        square = defaultdict(set)
+
+        for i in range(9):
+            for j in range(9):
+                ele = board[i][j]
+                if ele == ".":
+                    continue
+                
+                group = (i // 3, j // 3)
+                if ele in row[i] or ele in column[j] or ele in square[group]:
+                    return False
+                row[i].add(ele)
+                column[j].add(ele)
+                square[group].add(ele)
+        
+        return True
+
+        
