@@ -30,7 +30,6 @@ class Solution:
             level += 1
         return level
             
-        
 
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:

@@ -11,6 +11,7 @@ class Solution:
         elif p == None or q == None:
             return False
         
+        # preorder traversal
         if p.val == q.val:
             left_same = self.isSameTree(p.left, q.left)
             right_same = self.isSameTree(p.right, q.right)
