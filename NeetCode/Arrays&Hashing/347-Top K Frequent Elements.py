@@ -1,30 +1,24 @@
 class Solution:
-    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        num_map = dict()
-        for num in nums:
-            num_map[num] = num_map.get(num, 0) + 1
+    def topKFrequent(self, nums: list[int], k: int) -> list[int]:
         # bucket sort
-        bucket = [[] for i in range(len(nums))]
-        for key, value in num_map.items():
-            bucket[value - 1].append(key)
-        ans = list()
-        for i in range(len(nums) - 1, -1, -1):
-            if bucket[i]:
-                ans.extend(bucket[i])
-                if len(ans) == k:
-                    return ans
-nums = [1,1,1,2,2,3,100]
-k = 2
-num_map = dict()
-for num in nums:
-    num_map[num] = num_map.get(num, 0) + 1
-# bucket sort
-bucket = [[] for i in range(len(nums))]
-for key, value in num_map.items():
-    bucket[value - 1].append(key)
-ans = list()
-for i in range(len(nums) - 1, -1, -1):
-    if bucket[i]:
-        if len(ans) < k:
-            ans.extend(bucket[i])
-return ans
+        count = {}
+        freq = [[] for _ in range(len(nums))]
+        for n in nums:
+            count[n] = count.get(n, 0) + 1
+        for num, c in count.items():
+            freq[c-1].append(num)
+        res = []
+        for i in range(len(freq)-1, -1, -1):
+            for n in freq[i]:
+                res.append(n)
+                if len(res) == k:
+                    return res
+                
+def runTest():
+    nums = [1]
+    k = 1
+    s = Solution()
+    print(s.topKFrequent(nums, k))
+
+if __name__ == "__main__":
+    runTest()
