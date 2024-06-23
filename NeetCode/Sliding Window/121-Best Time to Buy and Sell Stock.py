@@ -1,33 +1,34 @@
-prices = [7,6,4,3,1]
-l, r = 0, 0
-max_profits = 0
-while r < len(prices) - 1:
-    r += 1
-    profits = prices[r] - prices[l]
-    if profits > max_profits:
-        max_profits = profits
-    if prices[r] < prices[l]:
-        l = r
+class Solution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        
+        smallIdx, maxPro = 0, 0
+        for i in range(1, len(prices)):
+            maxPro = max(prices[i]-prices[smallIdx], maxPro)
+            if prices[i] < prices[smallIdx]:
+                smallIdx = i
+        return maxPro
 
-print(max_profits)
+def runTest():
+# Example 1:
+# Input: prices = [7,1,5,3,6,4]
+# Output: 5
+# Example 2:
 
+# Input: prices = [7,6,4,3,1]
+# Output: 0
+    tests = (
+        ([7,1,5,3,6,4], 5),
+        ([7,6,4,3,1], 0),
+        ([1, 1, 1, 1], 0)
+    )
+    s = Solution()
+    for t, output in tests:
+        val = s.maxProfit(t)
+        assert val == output
 
-
-
-
-
-
-
-
-
-# if len(prices) == 1:
-#     print(0)
-# else:
-#     prediff = prices[-1] - prices[-2]
-#     ans = prediff if prediff > 0 else 0
-#     for i in range(len(prices) - 2, 0, -1):
-#         diff = prices[i] - prices[i - 1]
-#         prediff = max(prediff + diff, diff)
-#         if prediff > ans:
-#             ans = prediff
-#     print(ans)
+if __name__ == "__main__":
+    runTest()
