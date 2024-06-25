@@ -1,41 +1,44 @@
-class Solution:
-    def trap(self, height: list[int]) -> int:
-        head, tail = 0, len(height) - 1
+class Solution(object):
+    def trap(self, height):
+        print(f'height: {height}')
         maxLeft, maxRight = 0, 0
-        maxRes = 0
-        while head < tail:
-            res = min(maxLeft, maxRight) - height[head]
-            print(f"height[head]: {height[head]},height[tail]:{height[tail]}, maxLeft: {maxLeft}, maxRight: {maxRight} res: {res}")
-            if res > 0:
-                maxRes += res
-            maxLeft = max(maxLeft, height[head])
+        res = 0
+        head, tail = 0, len(height) - 1
+        while head <= tail:
+            print(f'head: {head}, tail: {tail}')
+            print(f'maxLeft: {maxLeft}, maxRight: {maxRight}')
+            print(f'height[head]: {height[head]}, height[tail]: {height[tail]}')
             if maxLeft <= maxRight:
-                print(f"maxLeft: {maxLeft}, maxRight: {maxRight}, maxRes: {maxRes}")	
+                area = maxLeft - height[head]
+                maxLeft = max(maxLeft, height[head])
                 head += 1
             else:
-                tail -= 1
-            while (maxRight < maxLeft) & (head < tail):
-                res = min(maxLeft, maxRight) - height[tail]
-                if res > 0:
-                    maxRes += res
+                area = maxRight - height[tail]
                 maxRight = max(maxRight, height[tail])
-                print(f"height[head]: {height[head]},height[tail]:{height[tail]}, maxLeft: {maxLeft}, maxRight: {maxRight} res: {res}")
-                if maxLeft <= maxRight:
-                    print(f"maxLeft: {maxLeft}, maxRight: {maxRight}, maxRes: {maxRes}")
-                    head += 1
-                else:
-                    tail -= 1
-            # compare maxLeft & maxRight, pick min to go head
-        return maxRes
+                tail -= 1
+            if area > 0:
+                res += area
+            print(f'area: {area}', f'res: {res}')
+   
+        return res
 
-def runTest():
-    #input [4,2,0,3,2,5] expected = 9
-    solution = Solution()
-    height = [4,2,0,3,2,5]
-    expected = 9
-    output = solution.trap(height)
-    print(f"Input: {height}, Output: {output}, Expected: {expected}")
-    assert output == expected
- 
-if __name__ == "__main__":
-	runTest()
+def test_trap():
+	s = Solution()
+	testCases = [
+		([0,1,0,2,1,0,1,3,2,1,2,1], 6),
+		([4,2,0,3,2,5], 9),
+		([4,2,3], 1)
+	]	
+	for height, solution in testCases:
+		print(height, solution)
+		res = s.trap(height)
+		assert res == solution
+  
+if __name__ == '__main__':
+	test_trap()
+            
+            
+            
+     
+        
+        
