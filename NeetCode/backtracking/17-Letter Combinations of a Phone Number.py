@@ -1,6 +1,6 @@
 class Solution:
     def letterCombinations(self, digits: str) -> list[str]:
-        num_char = {
+        digitToChar = {
             "2": "abc",
             "3": "def",
             "4": "ghi",
@@ -10,16 +10,25 @@ class Solution:
             "8": "tuv",
             "9": "wxyz"
             }
-
-        res = list()
-
-        def dfs(i, combination):
-            if len(combination) == len(digits):
-                res.append(combination)
+        
+        res = []
+        def backtracking(i, currStr):
+            if len(currStr) == len(digits):
+                res.append(currStr)
                 return
-
-            for c in num_char[digits[i]]:
-                dfs(i + 1, combination + c)
+            
+            for c in digitToChar[digits[i]]:
+                backtracking(i+1, currStr+c) 
+        
         if digits:
-            dfs(0, "")
+            backtracking(0, "")
         return res
+
+def runTest():
+    digits = ""
+    sol = Solution()
+    print(sol.letterCombinations(digits))
+    
+if __name__ == "__main__":
+    runTest()
+                

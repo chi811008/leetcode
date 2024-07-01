@@ -1,29 +1,32 @@
 class Solution:
     def combinationSum2(self, candidates: list[int], target: int) -> list[list[int]]:
-        res = list()
+        res = []
         candidates.sort()
-        print(candidates)
-
-        subset = list()
-        def dfs(i, residule):
-            if residule == 0:
-                res.append(subset.copy())
-                return
-            elif residule < 0 or i > len(candidates) - 1:
-                return
-            else:
+        
+        def dfs(i, curr, total):
+            if total == 0:
+                res.append(curr[:])
+                return 
             
-                subset.append(candidates[i])
-                dfs(i + 1, residule - candidates[i])
-                subset.pop()
+            if (i > len(candidates) - 1) or (total < 0):
+                return
+            
+            curr.append(candidates[i])
+            dfs(i + 1, curr, total-candidates[i])
+            curr.pop()
 
-                while i < len(candidates) - 1 and candidates[i] == candidates[i + 1]:
-                    i += 1
-                dfs(i + 1, residule)
-
-        dfs(0, target)
+            while i+1<len(candidates) and candidates[i+1] == candidates[i]:
+                i += 1
+            
+            dfs(i+1, curr, total)
+        dfs(0, [], target)
         return res
-candidates = [10,1,2,7,6,1,5]
-target = 8
-a = Solution().combinationSum2(candidates, target)
-print(a)
+
+def runTest():
+    candidates = [10,1,2,7,6,1,5]
+    target = 8
+    s = Solution()
+    print(s.combinationSum2(candidates, target))
+    
+if __name__ == '__main__':
+    runTest()
