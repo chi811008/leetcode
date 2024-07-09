@@ -17,6 +17,23 @@ class Solution:
             dfs(i + 1, curr, total)
             
         dfs(0, [], target)
+    def combinationSum(self, candidates: list[int], target: int) -> list[list[int]]:
+        res = []
+        
+        subSum = []
+        def dfs(i):
+            if sum(subSum) == target:
+                res.append(subSum.copy())
+                return
+            elif i == len(candidates) or sum(subSum) > target:
+                return
+            
+            subSum.append(candidates[i])
+            dfs(i+1)
+
+            subSum.pop()
+            dfs(i+1)
+        dfs(0)
         return res
         
         
