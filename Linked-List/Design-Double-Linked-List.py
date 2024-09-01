@@ -20,6 +20,15 @@ class MyLinkedList:
         if index == 0 and curr and curr != self.tail:
             return curr.val
         return -1
+
+    # def get(self, index: int) -> int:
+    #     curr = self.head.next
+    #     for i in range(index):
+    #         if not curr:
+    #             return -1
+    #         curr = curr.next
+    #     return curr.val if curr and curr != self.tail else -1
+
         
 
     def addAtHead(self, val: int) -> None:
