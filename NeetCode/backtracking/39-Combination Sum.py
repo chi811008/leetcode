@@ -1,5 +1,5 @@
 class Solution:
-    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+    def combinationSum(self, candidates: list[int], target: int) -> List[List[int]]:
         
         res = []
         
@@ -29,7 +29,7 @@ class Solution:
                 return
             
             subSum.append(candidates[i])
-            dfs(i+1)
+            dfs(i)
 
             subSum.pop()
             dfs(i+1)
