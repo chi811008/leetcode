@@ -5,33 +5,35 @@
 #         self.left = left
 #         self.right = right
 class Solution1:
-    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         res = []
         
         def traverse(node):
-            if not node:
-                return
-            res.append(node.val)
+            if node is None: return
+            
             traverse(node.left)
             traverse(node.right)
+            res.append(node.val)
+            return
         
         traverse(root)
         return res
-        
+
+# Iterative solution
 class Solution2:
-    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        if not root:
-            return 
-        res = []
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        if root is None: return []
         
+        res = []
         stack = [root]
-                
+        
         while stack:
             node = stack.pop()
             res.append(node.val)
             
-            if node.right:
-                stack.append(node.right)
             if node.left:
                 stack.append(node.left)
-        return res
+            if node.right:
+                stack.append(node.right)
+        
+        return res[::-1]
