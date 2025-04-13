@@ -12,8 +12,6 @@ class Solution:
             while head < tail:
                 if nums[head] + nums[tail] == target:
                     res.append([nums[i], nums[head], nums[tail]])
-                    print("got it")
-                    print(head, tail)
                     head += 1
                     while (head < tail) and (nums[head] == nums[head - 1]):
                         head += 1
